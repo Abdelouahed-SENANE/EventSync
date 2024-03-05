@@ -1,0 +1,46 @@
+.link.active {
+    background: #0f766e;
+    color: #ffffff;
+}
+
+
+/*==== Category Link ====*/
+.category-link {
+    position: relative;
+    padding: 5px 0;
+    font-size: 18px;
+    transition: width 0.5s  linear;
+
+}
+.category-link:hover {
+    color: #0f766e;
+}
+.category-link::after {
+    content : '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    transition: width 0.3s  linear;
+    background: #0f766e;
+}
+.category-link:hover::after {
+    width: 100%;
+}
+.category-link.active {
+    color: #0f766e;
+}
+.category-link.active::after {
+    width: 100%;
+}
+
+
+/* ===== Checkbox in Register page role  =====*/
+.selected {
+    transition: all 0.2s ease-in-out;
+}
+input[type='radio']:checked + .selected {
+    background: #0d9488;
+    color: #fff;
+}

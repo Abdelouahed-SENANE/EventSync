@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('social_id')->nullable();
+            $table->string('social_type')->nullable();
         });
     }
 
