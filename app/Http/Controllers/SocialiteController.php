@@ -29,6 +29,7 @@ class SocialiteController extends Controller
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
+                    'picture' => 'avatar.png',
                     'social_id' => $user->id,
                     'social_type' => 'google',
                     'password' => Hash::make('my-google')

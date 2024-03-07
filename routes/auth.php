@@ -35,7 +35,7 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 
     Route::get('/receive-email' , function() {
-        view('auth.receive-email');
+        return view('auth.receive-email');
     });
 });
 

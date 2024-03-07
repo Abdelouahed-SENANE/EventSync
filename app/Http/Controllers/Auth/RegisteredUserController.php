@@ -39,6 +39,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'picture' => 'avatar.jpg',
             'password' => Hash::make($request->password),
         ]);
         if($request->role == 'client') {

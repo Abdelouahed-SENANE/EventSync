@@ -104,7 +104,7 @@ return [
     'register_permission_check_method' => true,
 
     /*
-     * When set to true, Laravel\Octane\Events\OperationTerminated event listener will be registered
+     * When set to true, Laravel\Octane\Events\OperationTerminated event.jpg listener will be registered
      * this will refresh permissions on every TickTerminated, TaskTerminated and RequestTerminated
      * NOTE: This should not be needed in most cases, but an Octane/Vapor combination benefited from it.
      */

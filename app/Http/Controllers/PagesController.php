@@ -17,4 +17,9 @@ class PagesController extends Controller
 
         return view('pages.explore-events');
     }
+
+    public function event() {
+
+        return view('pages.event');
+    }
 }

@@ -53,7 +53,7 @@
 
         <div class="mx-auto max-w-screen-xl px-4 w-full">
             <div class="grid w-full sm:grid-cols-2 xl:grid-cols-4 gap-6">
-                <!-- event card  -->
+                <!-- event.jpg card  -->
                 <div
                     class="relative flex flex-col shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 max-w-sm">
                     <a href="/event/id" class="block">
