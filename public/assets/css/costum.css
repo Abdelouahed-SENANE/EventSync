@@ -76,9 +76,10 @@ input[type='radio']:checked + .selected {
 }
 @keyframes move {
     0% {
-        transform: translateY(10%);
+        transform: translateY(2%);
     }
     100% {
         transform: translateY(0%);
     }
 }
+

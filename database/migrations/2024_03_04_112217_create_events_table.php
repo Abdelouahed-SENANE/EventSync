@@ -9,25 +9,27 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+
+        public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->string('title');
-            $table->string('picture');
-            $table->string('excerpt');
-            $table->text('description');
-            $table->date('date');
+            $table->string('description');
+            $table->string('image');
+            $table->dateTime('date');
             $table->string('venue');
-            $table->integer('seats');
-            $table->float('price');
-            $table->timestamp('validated_at')->nullable();
+            $table->integer('number_of_seats');
+            $table->integer('price');
+            $table->string('validation_type');
+            $table->dateTime('validated_at')->nullable();
+            $table->string('status')->default('pending');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
+
         });
+
     }
 
     /**

@@ -5,16 +5,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SocialiteController;
 use \App\Http\Controllers\OrganizerController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use \App\Http\Controllers\EventController;
+//|--------------------------------------------------------------------------
+//| Web Routes
+//|--------------------------------------------------------------------------
+//|
+//| Here is where you can register web routes for your application. These
+//| routes are loaded by the RouteServiceProvider and all of them will
+//| be assigned to the "web" middleware group. Make something great!
+//|
+//*/
 // ---  Pages Routes ---
 Route::group([] , function () {
     Route::get('/' , [PagesController::class , 'home']);
@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
 // ==== Organizer Routes ====
 Route::group([] , function() {
     Route::get('/organizer' ,  [OrganizerController::class , 'dashboard'])->name('organizer');
+    Route::get('/create-event' ,  [EventController::class , 'create'])->name('create.event');
+    Route::post('/create-event' ,  [EventController::class , 'store'])->name('create.event');
+
 });
 // ==== Socialite Route ====
 Route::group([] , function () {

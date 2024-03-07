@@ -140,7 +140,8 @@
         <div class="mx-auto w-xl h-full container flex items-end justify-end">
             <div class="relative w-full">
                 <div class="absolute bottom-[-10px] left-0 ">
-                    <img src="{{ asset('storage/uploads/avatar.png') }}" alt="" class="w-[160px] h-[160px] border-8 rounded-full border-white">
+                    <img src="{{ asset('storage/uploads/avatar.png') }}" alt=""
+                         class="w-[160px] h-[160px] border-8 rounded-full border-white">
                 </div>
                 <div class="ml-[180px]">
                     <div class="mb-4">
@@ -151,7 +152,6 @@
                         <ul class="flex items-center text-black  w-fit overflow-hidden">
                             <li class="text-xl py-2 px-5 cursor-pointer relative active  tab_link">Home</li>
                             <li class="text-xl py-2 px-5 cursor-pointer  relative tab_link">My Events</li>
-                            <li class="text-xl py-2 px-5 cursor-pointer relative  tab_link">Home</li>
                         </ul>
                     </div>
                 </div>
@@ -167,21 +167,24 @@
                     <i class="fa-solid fa-thumbtack text-[24px] text-gray-500"></i>
                     <h3 class="text-xl">Statistics</h3>
                 </div>
-                <div class="bg-white shadow shadow-gray-200/80   mt-2 relative w-full rounded-lg overflow-hidden mb-5 min-h-[90px]">
+                <div
+                    class="bg-white shadow shadow-gray-200/80   mt-2 relative w-full rounded-lg overflow-hidden mb-5 min-h-[90px]">
                     <span class="absolute top-0 left-0 bg-orange-500 h-1 w-full "></span>
                     <div class="p-3">
                         <h4 class="text-gray-800 text-lg">Total Event</h4>
                         <span class="text-orange-500 text-5xl">64</span>
                     </div>
                 </div>
-                <div class="bg-white shadow shadow-gray-200/80   mt-2 relative w-full rounded-lg overflow-hidden mb-5 min-h-[90px]">
+                <div
+                    class="bg-white shadow shadow-gray-200/80   mt-2 relative w-full rounded-lg overflow-hidden mb-5 min-h-[90px]">
                     <span class="absolute top-0 left-0 bg-green-500 h-1 w-full "></span>
                     <div class="p-3">
                         <h4 class="text-gray-800 text-lg">Event Accepted</h4>
                         <span class="text-green-500 text-5xl">64</span>
                     </div>
                 </div>
-                <div class="bg-white shadow shadow-gray-200/80  mt-2 relative w-full rounded-lg overflow-hidden mb-5 min-h-[90px]">
+                <div
+                    class="bg-white shadow shadow-gray-200/80  mt-2 relative w-full rounded-lg overflow-hidden mb-5 min-h-[90px]">
                     <span class="absolute top-0 left-0 bg-red-500 h-1 w-full "></span>
                     <div class="p-3">
                         <h4 class="text-gray-800 text-lg"> Event refused</h4>
@@ -193,26 +196,26 @@
             <!-- Contents Page -->
             <div class="flex-1 mt-[35px]">
                 <!-- Contents create event -->
-                <div class="content hidden">
-                        <div class="bg-white p-20">
-                           <div class="flex items-start justify-between">
-                               <div>
-                                   <h2 class="text-4xl font-semibold">Start selling tickets</h2>
-                                   <p class="text-gray-500">Create your first event</p>
-                                   <a href="#" class="px-12 py-2 bg-teal-700 text-white my-3 rounded-md block w-fit">
-                                       Create Event
-                                       <i class="fa-solid fa-plus"></i>
-                                   </a>
-                               </div>
-                               <div class="w-[500px]">
-                                   <img src="{{ asset('assets/images/event.svg') }}" alt="" class="max-w-xl">
-                               </div>
-                           </div>
+                <div class="content ">
+                    <div class="bg-white p-20">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h2 class="text-4xl font-semibold">Start selling tickets</h2>
+                                <p class="text-gray-500">Create your first event</p>
+                                <a href="{{ route('create.event') }}" class="px-12 py-2 bg-teal-700 text-white my-3 rounded-md block w-fit">
+                                    Create Event
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            </div>
+                            <div class="w-[500px]">
+                                <img src="{{ asset('assets/images/event.svg') }}" alt="" class="max-w-[380px]">
+                            </div>
                         </div>
+                    </div>
                 </div>
                 <!-- End Content create event -->
 
-                <div class="content  ">
+                <div class="content  hidden">
                     <div class="bg-white min-h-[300px] p-5">
                         <div class="">
                             <div>
@@ -220,8 +223,71 @@
                                 <p class="text-gray-500">we take pride in bringing your ideas to life. </p>
                             </div>
                             <!-- Card Event -->
-                            <div class="h-[200px] my-5 bg-red-500">
-                                <div class="w-[250px] object-cover h-" style="background-image: url("{{ asset('assets/images/event.jpg') }}")"></div>
+                            <div class="h-[220px] relative w-full rounded-lg overflow-hidden shadow-sm shadow-gray-300/60  p-1 my-5 flex items-start gap-5">
+                                <!-- Display Image Event -->
+                                <div class="w-[250px] h-full bg-cover bg-red-500 bg-center"
+                                     style="background-image: url('{{ asset("assets/images/event.jpg") }}')"></div>
+                                <div>
+                                    <h4 class="text-4xl font-semibold">Title event</h4>
+                                    <p class="text-gray-500 my-5 max-w-[80%]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consequuntur
+                                        expedita fugiat obcaecati quam quidem saepe unde vitae voluptatum! Eligendi.</p>
+                                    <!-- foot Section -->
+
+                                        <div>
+                                            <ul class="mt-3 flex items-center gap-4">
+                                                <li class="pr-5 border-r border-gray-200">
+                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
+                                                    <div class="flex items-center gap-2 text-gray-600"><i
+                                                            class="fa-solid fa-location-dot"></i><span>Casablanca</span></div>
+                                                </li>
+                                                <li class="pr-5 border-r border-gray-200">
+                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
+                                                    <div class="flex items-center gap-2  text-gray-600"><span>Thursday, Mar 21</span></div>
+                                                </li>
+                                                <li class="mx-3">
+                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                    <div class="flex items-center gap-2 text-gray-600"><span>11:00 AM - 12:00 PM (1h)</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="w-12 text-white flex justify-center items-center bg-green-500 absolute h-full top-0 right-0">
+                                            <h4 class="rotate-[90deg] text-2xl">Acctepted</h4>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="h-[220px] relative w-full rounded-lg overflow-hidden shadow-sm shadow-gray-300/60  p-1 my-5 flex items-start gap-5">
+                                <!-- Display Image Event -->
+                                <div class="w-[250px] h-full bg-cover bg-red-500 bg-center"
+                                     style="background-image: url('{{ asset("assets/images/event.jpg") }}')"></div>
+                                <div>
+                                    <h4 class="text-4xl font-semibold">Title event</h4>
+                                    <p class="text-gray-500 my-5 max-w-[80%]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consequuntur
+                                        expedita fugiat obcaecati quam quidem saepe unde vitae voluptatum! Eligendi.</p>
+                                    <!-- foot Section -->
+
+                                        <div>
+                                            <ul class="mt-3 flex items-center gap-4">
+                                                <li class="pr-5 border-r border-gray-200">
+                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
+                                                    <div class="flex items-center gap-2 text-gray-600"><i
+                                                            class="fa-solid fa-location-dot"></i><span>Casablanca</span></div>
+                                                </li>
+                                                <li class="pr-5 border-r border-gray-200">
+                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
+                                                    <div class="flex items-center gap-2  text-gray-600"><span>Thursday, Mar 21</span></div>
+                                                </li>
+                                                <li class="mx-3">
+                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                    <div class="flex items-center gap-2 text-gray-600"><span>11:00 AM - 12:00 PM (1h)</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="w-12 text-white flex justify-center items-center bg-red-500 absolute h-full top-0 right-0">
+                                            <h4 class="rotate-[90deg] text-2xl">Refused</h4>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -267,7 +333,7 @@
     // ==== Display Settings profile
     const settingsBtn = document.getElementById('settingBtn');
     const settingWrapper = document.getElementById('settingWrapper');
-    if (settingsBtn){
+    if (settingsBtn) {
         settingsBtn.addEventListener('click', () => {
             if (settingWrapper.classList.contains('opacity-0')) {
                 settingWrapper.classList.remove('opacity-0', 'invisible', 'scale-90')
@@ -278,7 +344,7 @@
     }
     // hidden Setting profile
     window.addEventListener('click', (e) => {
-        if (settingsBtn){
+        if (settingsBtn) {
             if (!settingsBtn.contains(e.target) && !settingWrapper.contains(e.target)) {
                 settingWrapper.classList.add('opacity-0', 'invisible', 'scale-90')
             }
@@ -289,12 +355,14 @@
     const tabsLink = document.querySelectorAll('.tab_link');
     const contents = document.querySelectorAll('.content');
     console.log(contents)
-    tabsLink.forEach((tabLink , index) => {
-        tabLink.addEventListener('click' , () => {
-            tabsLink.forEach(tab => {tab.classList.remove('active')})
+    tabsLink.forEach((tabLink, index) => {
+        tabLink.addEventListener('click', () => {
+            tabsLink.forEach(tab => {
+                tab.classList.remove('active')
+            })
             tabLink.classList.add('active')
             contents.forEach(content => {
-                content.classList.add('hidden' , 'active')
+                content.classList.add('hidden', 'active')
             })
             contents[index].classList.remove('hidden')
         })
