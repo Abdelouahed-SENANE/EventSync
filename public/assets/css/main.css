@@ -1,9 +1,9 @@
 .active {
-    background: #FDE047;
-    color: #262626;
+    background: #0f766e;
+    color: #fff;
 }
 
 #btn_notification.active {
-    background: #FDE047;
+    background: #0f766e;
 
 }

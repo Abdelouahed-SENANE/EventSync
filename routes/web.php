@@ -6,6 +6,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SocialiteController;
 use \App\Http\Controllers\OrganizerController;
 use \App\Http\Controllers\EventController;
+use \App\Http\Controllers\AdminController;
 //|--------------------------------------------------------------------------
 //| Web Routes
 //|--------------------------------------------------------------------------
@@ -22,12 +23,19 @@ Route::group([] , function () {
     Route::get('event/{id}' , [PagesController::class , 'event'])->name('pages.event.jpg');
 
 });
-
+// Route Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile-picture', [ProfileController::class, 'picture'])->name('profile.update.picture');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+// ==== Admin Routes ====
+Route::group([] , function() {
+    Route::get('/admin-panel' ,  [AdminController::class , 'dashboard']);
+    Route::get('/create-event' ,  [EventController::class , 'create'])->name('create.event');
+    Route::post('/create-event' ,  [EventController::class , 'store'])->name('create.event');
+
 });
 
 // ==== Organizer Routes ====
