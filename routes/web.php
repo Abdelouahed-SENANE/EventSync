@@ -7,6 +7,9 @@ use App\Http\Controllers\SocialiteController;
 use \App\Http\Controllers\OrganizerController;
 use \App\Http\Controllers\EventController;
 use \App\Http\Controllers\AdminController;
+use \App\Http\Controllers\CategoryController;
+
+
 //|--------------------------------------------------------------------------
 //| Web Routes
 //|--------------------------------------------------------------------------
@@ -33,8 +36,15 @@ Route::middleware('auth')->group(function () {
 // ==== Admin Routes ====
 Route::group([] , function() {
     Route::get('/admin-panel' ,  [AdminController::class , 'dashboard']);
-    Route::get('/create-event' ,  [EventController::class , 'create'])->name('create.event');
-    Route::post('/create-event' ,  [EventController::class , 'store'])->name('create.event');
+    Route::get('/admin-events' ,  [AdminController::class , 'events'])->name('admin.events');
+    Route::get('/admin-users' ,  [AdminController::class , 'users'])->name('admin.users');
+    Route::get('/admin-categories' ,  [CategoryController::class , 'categories'])->name('admin.categories');
+    Route::delete('/delete-category/{category}' ,  [CategoryController::class , 'delete'])->name('admin.category.delete');
+    Route::put('/update-category/{category}' ,  [CategoryController::class , 'update'])->name('admin.category.update');
+    Route::delete('/delete-user/{user}' ,  [AdminController::class , 'softDelete'])->name('admin.users.delete');
+    Route::post('/accept-events' ,  [EventController::class , 'accepted'])->name('accepted.event');
+    Route::post('/refuse-events' ,  [EventController::class , 'refused'])->name('refused.event');
+    Route::post('/create-event' ,  [AdminController::class , 'store'])->name('create.event');
 
 });
 
@@ -43,6 +53,7 @@ Route::group([] , function() {
     Route::get('/organizer' ,  [OrganizerController::class , 'dashboard'])->name('organizer');
     Route::get('/create-event' ,  [EventController::class , 'create'])->name('create.event');
     Route::post('/create-event' ,  [EventController::class , 'store'])->name('create.event');
+    Route::delete('/delete-event' ,  [EventController::class , 'delete'])->name('delete.event');
 
 });
 // ==== Socialite Route ====

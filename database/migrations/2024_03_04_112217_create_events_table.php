@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('validation_type');
             $table->dateTime('validated_at')->nullable();
             $table->string('status')->default('pending');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
 
         });

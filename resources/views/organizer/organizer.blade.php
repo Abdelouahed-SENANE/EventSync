@@ -158,7 +158,7 @@
             </div>
         </div>
     </div>
-    <div class="container  mx-auto w-xl my-20">
+    <div class="container w-[75%] mx-auto w-xl my-20">
 
         <div class="flex w-full">
             <!-- statistics -->
@@ -216,79 +216,153 @@
                 <!-- End Content create event -->
 
                 <div class="content  hidden">
-                    <div class="bg-white min-h-[300px] p-5">
+                    <div class="bg-white min-h-[100px] p-5">
                         <div class="">
                             <div>
                                 <h2 class="text-4xl font-semibold">Your event in platform</h2>
                                 <p class="text-gray-500">we take pride in bringing your ideas to life. </p>
                             </div>
                             <!-- Card Event -->
-                            <div class="h-[220px] relative w-full rounded-lg overflow-hidden shadow-sm shadow-gray-300/60  p-1 my-5 flex items-start gap-5">
-                                <!-- Display Image Event -->
-                                <div class="w-[250px] h-full bg-cover bg-red-500 bg-center"
-                                     style="background-image: url('{{ asset("assets/images/event.jpg") }}')"></div>
-                                <div>
-                                    <h4 class="text-4xl font-semibold">Title event</h4>
-                                    <p class="text-gray-500 my-5 max-w-[80%]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consequuntur
-                                        expedita fugiat obcaecati quam quidem saepe unde vitae voluptatum! Eligendi.</p>
-                                    <!-- foot Section -->
-
+                            @foreach($myEvents as $myEvent)
+                                @if($myEvent->status === 'accepted' )
+                                    <div class="h-[180px] relative w-full rounded-lg overflow-hidden shadow-sm shadow-gray-300/60  p-1 my-5 flex items-start gap-5">
+                                        <!-- Delete Event -->
+                                        <div class="absolute right-14 top-0">
+                                            <form action="{{ route('delete.event') }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="hidden" name="id" value="{{ $myEvent->id }}">
+                                                <button class="px-3 rounded-md  py-2 bg-rose-500 text-white">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <!-- Display Image Event -->
+                                        <div class="w-[160px] h-full bg-cover bg-red-500 bg-center"
+                                             style="background-image: url('{{ asset("storage/" . $myEvent->image) }}')"></div>
                                         <div>
-                                            <ul class="mt-3 flex items-center gap-4">
-                                                <li class="pr-5 border-r border-gray-200">
-                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
-                                                    <div class="flex items-center gap-2 text-gray-600"><i
-                                                            class="fa-solid fa-location-dot"></i><span>Casablanca</span></div>
-                                                </li>
-                                                <li class="pr-5 border-r border-gray-200">
-                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
-                                                    <div class="flex items-center gap-2  text-gray-600"><span>Thursday, Mar 21</span></div>
-                                                </li>
-                                                <li class="mx-3">
-                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
-                                                    <div class="flex items-center gap-2 text-gray-600"><span>11:00 AM - 12:00 PM (1h)</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="w-12 text-white flex justify-center items-center bg-green-500 absolute h-full top-0 right-0">
-                                            <h4 class="rotate-[90deg] text-2xl">Acctepted</h4>
-                                        </div>
-                                </div>
-                            </div>
-                            <div class="h-[220px] relative w-full rounded-lg overflow-hidden shadow-sm shadow-gray-300/60  p-1 my-5 flex items-start gap-5">
-                                <!-- Display Image Event -->
-                                <div class="w-[250px] h-full bg-cover bg-red-500 bg-center"
-                                     style="background-image: url('{{ asset("assets/images/event.jpg") }}')"></div>
-                                <div>
-                                    <h4 class="text-4xl font-semibold">Title event</h4>
-                                    <p class="text-gray-500 my-5 max-w-[80%]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consequuntur
-                                        expedita fugiat obcaecati quam quidem saepe unde vitae voluptatum! Eligendi.</p>
-                                    <!-- foot Section -->
+                                            <h4 class="text-2xl font-semibold">{{ $myEvent->title }}</h4>
+                                            <p class="text-gray-500 my-2 max-w-[80%]">{{ $myEvent->description }}</p>
+                                            <!-- foot Section -->
 
-                                        <div>
-                                            <ul class="mt-3 flex items-center gap-4">
-                                                <li class="pr-5 border-r border-gray-200">
-                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
-                                                    <div class="flex items-center gap-2 text-gray-600"><i
-                                                            class="fa-solid fa-location-dot"></i><span>Casablanca</span></div>
-                                                </li>
-                                                <li class="pr-5 border-r border-gray-200">
-                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
-                                                    <div class="flex items-center gap-2  text-gray-600"><span>Thursday, Mar 21</span></div>
-                                                </li>
-                                                <li class="mx-3">
-                                                    <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
-                                                    <div class="flex items-center gap-2 text-gray-600"><span>11:00 AM - 12:00 PM (1h)</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                            <div>
+                                                <ul class="mt-5 flex items-center gap-4">
+                                                    <li class="pr-5 border-r border-gray-200">
+                                                        <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
+                                                        <div class="flex items-center gap-2 text-gray-600"><i
+                                                                class="fa-solid fa-location-dot"></i><span>{{ $myEvent->venue }}</span></div>
+                                                    </li>
+                                                    <li class="pr-5 border-r border-gray-200">
+                                                        <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
+                                                        <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($myEvent->date)->format('l, M d') }}</span></div>
+                                                    </li>
+                                                    <li class="mx-3">
+                                                        <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                        <div class="flex items-center gap-2 text-gray-600"><span>{{\Carbon\Carbon::parse($myEvent->date)->format('h:i A') }}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="w-12 text-white flex justify-center items-center bg-green-500 absolute h-full top-0 right-0">
+                                                <h4 class="rotate-[90deg] text-xl">Acctepted</h4>
+                                            </div>
                                         </div>
-                                        <div class="w-12 text-white flex justify-center items-center bg-red-500 absolute h-full top-0 right-0">
-                                            <h4 class="rotate-[90deg] text-2xl">Refused</h4>
+                                    </div>
+                                @endif
+                                    @if($myEvent->status === 'pending' )
+                                        <div class="h-[180px] relative w-full rounded-lg overflow-hidden shadow-sm shadow-gray-300/60  p-1 my-5 flex items-start gap-5">
+                                            <!-- Delete Event -->
+                                            <div class="absolute right-14 top-0">
+                                                <form action="{{ route('delete.event') }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <input type="hidden" name="id" value="{{ $myEvent->id }}">
+                                                    <button class="px-3 rounded-md  py-2 bg-rose-500 text-white">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <!-- Display Image Event -->
+
+                                            <div class="w-[160px] h-full bg-cover bg-red-500 bg-center"
+                                                 style="background-image: url('{{ asset("storage/" . $myEvent->image) }}')"></div>
+                                            <div>
+                                                <h4 class="text-2xl font-semibold">{{ $myEvent->title }}</h4>
+                                                <p class="text-gray-500 my-2 max-w-[80%]">{{ $myEvent->description }}</p>
+                                                <!-- foot Section -->
+
+                                                <div>
+                                                    <ul class="mt-5 flex items-center gap-4">
+                                                        <li class="pr-5 border-r border-gray-200">
+                                                            <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
+                                                            <div class="flex items-center gap-2 text-gray-600"><i
+                                                                    class="fa-solid fa-location-dot"></i><span>{{ $myEvent->venue }}</span></div>
+                                                        </li>
+                                                        <li class="pr-5 border-r border-gray-200">
+                                                            <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
+                                                            <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($myEvent->date)->format('l, M d') }}</span></div>
+                                                        </li>
+                                                        <li class="mx-3">
+                                                            <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                            <div class="flex items-center gap-2 text-gray-600"><span>{{\Carbon\Carbon::parse($myEvent->date)->format('h:i A') }}</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="w-12 text-white flex justify-center items-center bg-blue-500 absolute h-full top-0 right-0">
+                                                    <h4 class="rotate-[90deg] text-xl">Pending</h4>
+                                                </div>
+                                            </div>
                                         </div>
-                                </div>
-                            </div>
+                                    @endif
+                                    @if($myEvent->status === 'refused' )
+                                        <div class="h-[180px] relative w-full rounded-lg overflow-hidden shadow-sm shadow-gray-300/60  p-1 my-5 flex items-start gap-5">
+                                            <!-- Delete Event -->
+                                            <div class="absolute right-14 top-0">
+                                                <form action="{{ route('delete.event') }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <input type="hidden" name="id" value="{{ $myEvent->id }}">
+                                                    <button class="px-3 rounded-md  py-2 bg-rose-500 text-white">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <!-- Display Image Event -->
+                                            <div class="w-[160px] h-full bg-cover bg-red-500 bg-center"
+                                                 style="background-image: url('{{ asset("storage/" . $myEvent->image) }}')"></div>
+                                            <div>
+                                                <h4 class="text-2xl font-semibold">{{ $myEvent->title }}</h4>
+                                                <p class="text-gray-500 my-2 max-w-[80%]">{{ $myEvent->description }}</p>
+                                                <!-- foot Section -->
+
+                                                <div>
+                                                    <ul class="mt-5 flex items-center gap-4">
+                                                        <li class="pr-5 border-r border-gray-200">
+                                                            <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
+                                                            <div class="flex items-center gap-2 text-gray-600"><i
+                                                                    class="fa-solid fa-location-dot"></i><span>{{ $myEvent->venue }}</span></div>
+                                                        </li>
+                                                        <li class="pr-5 border-r border-gray-200">
+                                                            <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
+                                                            <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($myEvent->date)->format('l, M d') }}</span></div>
+                                                        </li>
+                                                        <li class="mx-3">
+                                                            <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                            <div class="flex items-center gap-2 text-gray-600"><span>{{\Carbon\Carbon::parse($myEvent->date)->format('h:i A') }}</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="w-12 text-white flex justify-center items-center bg-rose-500 absolute h-full top-0 right-0">
+                                                    <h4 class="rotate-[90deg] text-xl">Refused</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                            @endforeach
+
+
                         </div>
                     </div>
                 </div>

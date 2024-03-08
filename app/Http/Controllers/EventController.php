@@ -40,6 +40,36 @@ class EventController extends Controller
             'user_id' => $request->input('user'),
             'category_id' => $request->input('category'),
         ]);
-
+        return redirect()->route('organizer');
     }
+
+    // === Accept Events ===
+    public function accepted(Request $request) {
+        $event = Event::find($request->event);
+        if ($event) {
+            $event->validated_at = now();
+            $event->status = 'accepted';
+            $event->update();
+
+        }
+        return back();
+    }
+
+    public function refused(Request $request) {
+        $event = Event::find($request->event);
+        if ($event) {
+            $event->validated_at = now();
+            $event->status = 'refused';
+            $event->update();
+
+        }
+        return back();
+    }
+
+    public function delete(Request $request) {
+        $event = Event::find($request->id);
+        $event->delete();
+        return back();
+    }
+
 }

@@ -14,9 +14,7 @@ export default {
             position: {
                 sticky: 'sticky', // Add a custom position sticky utility
             },
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
+
         },
     },
 

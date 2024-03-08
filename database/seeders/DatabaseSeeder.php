@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $organizer = User::create([
             'name' => 'organizer',
             'email' => 'organizer@test.fr',
-            'picture' => 'avatar.png',
+            'picture' => 'uploads/avatar.png',
             'password' => Hash::make('password'),
         ]);
         $organizer->assignRole('organizer');
