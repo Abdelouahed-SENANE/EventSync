@@ -67,8 +67,8 @@
                                     @foreach($categories as $category)
                                         <tr>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">{{ $category->id }}</td>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">{{ $category->title }}</td>
-                                            <td class="px-4 py-4 text-sm font-medium max-w-[150px] text-gray-700 whitespace-wrap">{{ $category->description }}</td>
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap title">{{ $category->title }}</td>
+                                            <td class="px-4 py-4 text-sm font-medium max-w-[150px] text-gray-700 whitespace-wrap desc">{{ $category->description }}</td>
 
                                             <td class="flex justify-center gap-2 px-4 py-4 text-sm whitespace-nowrap text-center">
                                                 <form action="{{ route('admin.category.delete', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
@@ -78,13 +78,12 @@
                                                         <i class="fa-solid fa-trash text-[14px]"></i>
                                                     </button>
                                                 </form>
-                                                <form action="{{ route('admin.category.update', $category->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('put')
-                                                    <button type="submit" class="px-2.5 py-2 bg-green-500   transition-colors duration-200 rounded-lg block cursor-pointer hover:bg-green-500/80 text-white">
+                                                <div>
+
+                                                    <button data-id="{{ $category->id }}"  class="px-2.5 py-2 bg-green-500 update  transition-colors duration-200 rounded-lg block cursor-pointer hover:bg-green-500/80 text-white">
                                                         <i class="fa-solid fa-arrows-rotate text-[14px]"></i>
                                                     </button>
-                                                </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -99,7 +98,7 @@
 
 
         </main>
-        <!-- ======= Pop up ====== -->
+        <!-- ======= Pop up create ====== -->
         <div id="popup" class="fixed w-full min-h-screen  z-[1000] transition-all opacity-0 invisible duration-300  inset-0">
             <div class="bg-gray-500 opacity-80 absolute inset-0  w-full h-full" onclick="closePopup()"></div>
             <div
@@ -112,10 +111,10 @@
                             <i class="fa-solid fa-xmark text-[25px] text-gray-400  transition-all duration-300 hover:text-teal-700"></i>
                         </button>
                     </div>
-                    <form action="{{ route('profile.update.picture') }} "  method="post"
+                    <form action="/blank"  method="post" id="formCategory"
                           class="bg-white  w-[600px]">
                         @csrf
-
+                        <input type="hidden" id="category" value="" name="category">
                         <div class="flex p-1 mb-4 text-sm text-red-800 rounded-lg bg-red-50 max-w-[90%] mx-auto hidden" role="alert" id="alertDanger">
                             <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -136,25 +135,25 @@
                                     <x-input-label class="text-lg my-3">
                                         Category title <span class="text-red-600">*</span>
                                     </x-input-label>
-                                    <x-text-input id="name" class="block w-[600px] mt-1 w-full" type="text" name="title"
+                                    <x-text-input id="title" class="block w-[600px] mt-1 w-full" type="text" name="title"
                                                   autofocus placeholder="Title"
                                     />
-                                    <x-input-error :messages="$errors->get('title')" class="mt-2"/>
+                                    <div id="titleErr"  class="mt-2 text-rose-500 text-sm"></div>
                                 </div>
                                 <div class="">
                                     <x-input-label class="text-lg my-3">
                                         Description <span class="text-red-600">*</span>
                                     </x-input-label>
-                                    <textarea id="message" rows="4" name="description"
+                                    <textarea id="description" rows="4" name="description"
                                               class="block p-2.5 resize-none w-full text-sm text-gray-900 text-base focus:border border-gray-200  bg-gray-50 rounded-sm outline-none   focus:ring focus:border-teal-400 focus:outline-none focus:ring-teal-500 focus:ring-opacity-20"
                                               placeholder="Write your thoughts here..."></textarea>
+                                    <div id="descErr"  class="mt-2 text-rose-500 text-sm"></div>
 
-                                    <x-input-error  :messages="$errors->get('description')" class="mt-2"/>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center pt-2">
-                            <button type="submit" class="bg-teal-700  rounded-md text-white px-16 py-2 ">Create</button>
+                            <button type="submit" id="submit" class="bg-teal-700  rounded-md text-white px-16 py-2 ">Create</button>
                         </div>
                     </form>
                 </div>
@@ -166,11 +165,36 @@
     <script>
         const popup = document.getElementById('popup');
         const formPicture = document.getElementById('formPicture');
+        const updateBtns = document.querySelectorAll('.update');
+
+        // update Category
+        updateBtns.forEach(update => {
+            update.addEventListener('click' , (event) => {
+                if (popup.classList.contains('opacity-0')) {
+                    popup.classList.remove('opacity-0', 'invisible');
+                    formPicture.classList.remove('scale-90');
+                }
+                const category_id = document.getElementById('category');
+                const submit = document.getElementById('submit');
+                let desc = document.getElementById('description');
+                let title = document.getElementById('title');
+                category_id.value = update.getAttribute('data-id');
+                submit.innerText = 'Update';
+                desc.value = event.target.closest('tr').querySelector('.desc').textContent;
+                title.value = event.target.closest('tr').querySelector('.title').textContent;
+            })
+        })
 
         function closePopup() {
             if (!popup.classList.contains('opacity-0')) {
                 popup.classList.add('opacity-0', 'invisible');
                 formPicture.classList.add('scale-90');
+                const category_id = document.getElementById('category');
+                let desc = document.getElementById('description');
+                let title = document.getElementById('title');
+                category_id.value = '';
+                desc.value ='';
+                title.value = '';
             }
         }
 
@@ -178,9 +202,64 @@
             if (popup.classList.contains('opacity-0')) {
                 popup.classList.remove('opacity-0', 'invisible');
                 formPicture.classList.remove('scale-90');
+                const submit = document.getElementById('submit');
+                submit.innerText = 'create';
+                const category_id = document.getElementById('category');
+                category_id.value = '';
             }
+
+
         }
+
         $(document).ready(function() {
+            $('#formCategory').on('submit' , function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+                let id = $('#category').val();
+
+                if ( id === '') {
+                    let csrfToken = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        url : '{{ route('create.category') }}',
+                        method : 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        data: formData,
+                        dataType : 'json',
+                        processData: false,
+                        contentType: false,
+                        success : function(response) {
+                            if (response.status === false){
+                                $('#titleErr').html('')
+
+                                response.errors.title.forEach(title => {
+                                    $('#titleErr').append(`
+                                       <span>${title}</span>
+                                    `)
+                                })
+                                $('#descErr').html('')
+                                response.errors.description.forEach(desc => {
+                                    $('#descErr').append(`
+                                       <span>${desc}</span>
+                                    `)
+                                })
+                            }else{
+                                $('#titleErr').html('')
+                                $('#descErr').html('')
+
+                            }
+                        },
+                        error : function(error){
+                            console.log(error);
+                        }
+                    })
+                }else {
+
+                }
+            })
+
 
         })
     </script>
