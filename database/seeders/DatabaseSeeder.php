@@ -27,5 +27,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
         $organizer->assignRole('organizer');
+        $admin = User::create([
+            'name' => 'admin',
+            'email' => 'admin@test.fr',
+            'picture' => 'uploads/avatar.png',
+            'password' => Hash::make('password'),
+        ]);
+        $admin->assignRole('admin');
     }
 }

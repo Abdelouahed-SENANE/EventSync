@@ -6,7 +6,6 @@
             <x-application-logo  class="text-teal-600"/>
             <div>
                 <span class="text-green-600 hidden" id="success">Saved</span>
-
             </div>
             <div class="flex justify-center relative text-center cursor-pointer" onclick="openPopup()" >
                 <img src="{{ asset('storage/'. $user->picture) }}" alt="" id="img_profile" class="h-[90px] w-[90px] rounded-full">

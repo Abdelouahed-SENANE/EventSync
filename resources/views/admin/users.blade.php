@@ -85,7 +85,7 @@
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 @if($user->hasRole('admin'))
                                                     <div class="text-sm text-rose-500 bg-rose-500/20 w-fit px-4 py-1 rounded-2xl">admin</div>
-                                                @elseif($user->hasRole('organiser'))
+                                                @elseif($user->hasRole('organizer'))
                                                     <div class="text-sm text-green-500 bg-green-400/20 w-fit px-4 py-1 rounded-2xl">organiser</div>
                                                 @else
                                                     <div class="text-sm text-blue-500 bg-blue-400/20 w-fit px-4 py-1 rounded-2xl">Client</div>

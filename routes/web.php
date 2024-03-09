@@ -40,7 +40,7 @@ Route::group([] , function() {
     Route::get('/admin-users' ,  [AdminController::class , 'users'])->name('admin.users');
     Route::get('/admin-categories' ,  [CategoryController::class , 'categories'])->name('admin.categories');
     Route::delete('/delete-category/{category}' ,  [CategoryController::class , 'delete'])->name('admin.category.delete');
-    Route::put('/update-category/' ,  [CategoryController::class , 'update'])->name('update.category');
+    Route::post('/update-category/' ,  [CategoryController::class , 'update'])->name('update.category');
     Route::post('/create-category/' ,  [CategoryController::class , 'store'])->name('create.category');
     Route::delete('/delete-user/{user}' ,  [AdminController::class , 'softDelete'])->name('admin.users.delete');
     Route::post('/accept-events' ,  [EventController::class , 'accepted'])->name('accepted.event');

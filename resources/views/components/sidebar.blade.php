@@ -53,7 +53,7 @@
                                 <i class="fa-solid fa-ellipsis-vertical text-[20px] transition-all duration-300 ease-in-out hover:text-gray-800 text-white cursor-pointer"></i>
                             </button>
                             <div class="p-2 bg-white shadow-md rounded-md w-[150px] hidden absolute bottom-[140%] left-[0px]" id="dropdown">
-                                <a class="flex items-center px-3 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-teal-600 hover:text-white" href="/admin/profile">
+                                <a class="flex items-center px-3 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-teal-600 hover:text-white" href="/profile">
                                     <i class="fa-solid fa-user text-[16px]"></i>
                                     <span class="mx-2 text-sm font-medium">Profile</span>
                                 </a>

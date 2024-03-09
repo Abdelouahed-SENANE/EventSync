@@ -16,18 +16,41 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request) {
-        $validatePicture = Validator::make($request->all(), [
+        $verfiedInput = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:500',
         ]);
-        if ($validatePicture->fails()){
-            return response()->json(['errors' => $validatePicture->errors() , 'status' => false]);
+        if ($verfiedInput->fails()){
+            $errors = [
+                'errors' => $verfiedInput->errors()->all(),
+                'status' => false
+            ];
+            return  response()->json($errors);
         }
-        $newCategory = Category::create([
-            'title' => $verfiedInput->title,
-            'description' => $verfiedInput->description
+        $newCategory = new Category();
+        $newCategory->title = $request->input('title');
+        $newCategory->description = $request->input('description');
+        $newCategory->save();
+        $categories = Category::all();
+        return response()->json(['status' => true , 'back' => back()->with(['success' => 'Category Added successfully'])]);
+    }
+    public function update(Request $request) {
+        $verfiedInput = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
         ]);
-        return response()->json(['status' => true , 'success' => 'Category added succefully']);
+        if ($verfiedInput->fails()){
+            $errors = [
+                'errors' => $verfiedInput->errors()->all(),
+                'status' => false
+            ];
+            return  response()->json($errors);
+        }
+        $updateCategory = Category::findOrFail($request->category);
+        $updateCategory->title = $request->input('title');
+        $updateCategory->description = $request->input('description');
+        $updateCategory->update();
+        return response()->json(['status' => true , 'back' => back()->with(['success' => 'Category updated successfully'])]);
     }
     public function delete(Request $request) {
         try {

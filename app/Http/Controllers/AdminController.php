@@ -19,7 +19,6 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::whereNull('deleted_at')->get();
-
         return view('admin.users', compact('users'));
     }
 

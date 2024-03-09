@@ -45,6 +45,9 @@ class RegisteredUserController extends Controller
         if($request->role == 'client') {
             $user->assignRole('client');
         }
+        if($request->role == 'organizer') {
+            $user->assignRole('organizer');
+        }
 
         event(new Registered($user));
 
