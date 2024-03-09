@@ -1,4 +1,4 @@
-<header class="fixed top-0 left-0 right-0 transition-all duration-300 z-20 ease-in-out" id="header">
+<header class="fixed top-0 left-0 right-0 transition-all duration-300 z-50 ease-in-out" id="header">
     <div class="mx-auto flex h-20  w-[95%] items-center gap-8 px-4 sm:px-6 lg:px-8">
         <!-- Logo -->
         <x-application-logo class="text-white text-xl"/>

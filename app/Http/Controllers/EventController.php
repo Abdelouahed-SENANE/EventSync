@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     //
-    public function create() {
+    public function create(Request $request) {
         $categories = Category::all();
+
 
         return view('organizer.create-event' , ['categories' => $categories]);
     }
@@ -27,7 +28,7 @@ class EventController extends Controller
             'category' => 'required',
             'validation' => 'required'
         ]);
-        $image = $request->file('image')->store('upload');
+        $image = $request->file('image')->store('uploads');
         $newEvent = Event::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
@@ -50,7 +51,6 @@ class EventController extends Controller
             $event->validated_at = now();
             $event->status = 'accepted';
             $event->update();
-
         }
         return back();
     }
@@ -71,5 +71,7 @@ class EventController extends Controller
         $event->delete();
         return back();
     }
+
+
 
 }

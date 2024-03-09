@@ -24,7 +24,6 @@ class SocialiteController extends Controller
             $findUser = User::where('social_id' , $user->id)->first();
             if($findUser) {
                 Auth::login($findUser);
-                return redirect('/');
             }else{
                 $newUser = User::create([
                     'name' => $user->name,
@@ -35,8 +34,8 @@ class SocialiteController extends Controller
                     'password' => Hash::make('my-google')
                 ]);
                 Auth::login($newUser);
-                return redirect('/');
             }
+            return redirect('/');
         }catch (\Exception $e) {
             dd($e->getMessage());
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -13,9 +14,13 @@ class PagesController extends Controller
         return view('pages.home');
     }
 
-    public function exploreEvents() {
+    public function exploreEvents(Request $request) {
 
-        return view('pages.explore-events');
+        $events = Event::where('status', 'accepted')->paginate(4);
+        if ($request->ajax()){
+            return response()->json(['events' => $events]);
+        }
+        return view('pages.explore-events' , compact('events'));
     }
 
     public function event() {

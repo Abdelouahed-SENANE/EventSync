@@ -31,7 +31,6 @@ class CategoryController extends Controller
         $newCategory->title = $request->input('title');
         $newCategory->description = $request->input('description');
         $newCategory->save();
-        $categories = Category::all();
         return response()->json(['status' => true , 'back' => back()->with(['success' => 'Category Added successfully'])]);
     }
     public function update(Request $request) {

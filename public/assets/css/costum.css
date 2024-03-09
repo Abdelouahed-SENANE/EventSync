@@ -83,3 +83,42 @@ input[type='radio']:checked + .selected {
     }
 }
 
+
+/* Apply styles to pagination links */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    background: #fff;
+}
+
+.pagination li {
+    margin-right: 5px;
+}
+
+.pagination li a,
+.pagination li span {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+
+}
+
+.pagination li a:hover {
+    background-color: #ddd;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination .disabled span {
+    background-color: #f0f0f0;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+

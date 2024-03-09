@@ -256,7 +256,6 @@
                         processData: false,
                         contentType: false,
                         success: function (response) {
-                            console.log(response.errors)
                             if (response.status == false) {
                                 $('#alertDanger').removeClass('hidden');
                                 $('#wrapperErrors').html('')
