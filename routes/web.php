@@ -22,8 +22,8 @@ use \App\Http\Controllers\CategoryController;
 // ---  Pages Routes ---
 Route::group([] , function () {
     Route::get('/' , [PagesController::class , 'home']);
-    Route::get('explore-events' , [PagesController::class , 'exploreEvents'])->name('pages.explore-events');
-    Route::get('event/{id}' , [PagesController::class , 'event'])->name('pages.event');
+    Route::get('/explore-events' , [PagesController::class , 'exploreEvents'])->name('pages.explore-events');
+    Route::get('event/{event}' , [PagesController::class , 'event'])->name('pages.event');
 
 
 });

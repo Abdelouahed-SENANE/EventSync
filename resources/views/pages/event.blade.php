@@ -136,10 +136,11 @@
         </div>
     </header>
     {{--  Head page --}}
-    <div class="bg-teal-100 w-full z-10 h-[200px] mt-[80px]">
-        <div class="mx-auto w-xl h-full container flex flex-col items-center justify-center">
+    <div class="w-full z-10 relative h-[300px] bg-cover bg-center mt-[80px]" style="background-image:url('{{ asset('assets/images/single.jpg') }}') ">
+        <div class="w-full h-full absolute inset-0 bg-gray-800/80"></div>
+        <div class="mx-auto w-xl h-full text-white container flex flex-col items-center relative justify-center">
             <h3 class="text-2xl uppercase font-medium my-2">Details Event</h3>
-            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p class="text-gray-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </div>
     </div>
     <div class="container  mx-auto w-xl my-20">
@@ -149,27 +150,27 @@
                 <!-- head Section -->
                 <div class="flex gap-5 mb-6">
                     <div class="w-[100px] h-[100px] text-white bg-teal-400">
-                        <div class="p-0.5 bg-teal-600  text-sm  text-center uppercase">THURSDAY</div>
+                        <div class="p-0.5 bg-teal-600  text-sm  text-center uppercase">{{ \Carbon\Carbon::parse($event[0]->date)->format('l') }}</div>
                         <div class="flex flex-col w-full items-center mt-1">
-                            <span class="text-2xl font-medium">20</span>
-                            <span>MAR</span>
+                            <span class="text-2xl font-medium">{{ \Carbon\Carbon::parse($event[0]->date)->format('d') }}</span>
+                            <span>{{strtoupper(\Carbon\Carbon::parse($event[0]->date)->format('M')) }}</span>
                         </div>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-medium">Falling through the Cracks - Social Work week</h1>
+                        <h1 class="text-2xl font-medium">{{ $event[0]->title }}</h1>
                         <ul class="mt-3 flex items-center gap-4">
                             <li class="pr-5 border-r border-gray-200">
                                 <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
                                 <div class="flex items-center gap-2 text-gray-600"><i
-                                        class="fa-solid fa-location-dot"></i><span>Casablanca</span></div>
+                                        class="fa-solid fa-location-dot"></i><span>{{ $event[0]->venue }}</span></div>
                             </li>
                             <li class="pr-5 border-r border-gray-200">
                                 <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
-                                <div class="flex items-center gap-2  text-gray-600"><span>Thursday, Mar 21</span></div>
+                                <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($event[0]->date)->format('l, M d') }}</span></div>
                             </li>
                             <li class="mx-3">
                                 <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
-                                <div class="flex items-center gap-2 text-gray-600"><span>11:00 AM - 12:00 PM (1h)</span>
+                                <div class="flex items-center gap-2 text-gray-600"><span>{{ \Carbon\Carbon::parse($event[0]->date)->format('h:i A') }}</span>
                                 </div>
                             </li>
                         </ul>
@@ -178,26 +179,22 @@
 
                 <!-- body section -->
                 <div>
-                    <div class="my-6">
-                        <img src="{{ asset('assets/images/event.jpg') }}" alt="" class="w-full">
+                    <div class="my-6 overflow-hidden">
+                        <img src="{{ asset('storage/') . '/'. $event[0]->image }}" alt="" class="w-full  max-h-[560px] rounded-md">
                     </div>
-                    <div class="inline-flex items-center gap-3 border-b w-full border-gray-200 p-3 rounded-md">
+                    <div class="inline-flex items-center gap-3 border-b w-full  border-gray-200 p-3 rounded-md">
                         <div>
-                            <img src="{{ asset('storage/uploads/avatar.png') }}" alt="" class="h-16 w-16">
+                            <img src="{{ asset('storage'). '/' . $event[0]->user->picture }}" alt="" class="h-16 w-16">
                         </div>
                         <div class="flex flex-col  items-justify">
                             <span class="text-base">Organised by</span>
-                            <span>name Organizer</span>
+                            <span>{{ $event[0]->user->name }}</span>
                             <span class="block text-center h-1 mt-2 w-[50px] bg-teal-500"></span>
                         </div>
                     </div>
                     <div class="my-5">
                         <h2 class="text-xl font-bold">About This Event</h2>
-                        <p class="leading-8	text-justify">Restitute are pleased to share a workshop for Social Work England on 21st May at 11am.
-                            The workshop will be an acitvity-based session thinking about disclosure and the immediate
-                            aftermath this can have on family relationships for generations and decades to come.
-                            This workshop will contain challenging material that may not be suitable for everyone.
-                            Expect to hear about self-harm, suidical thoughts, sexual abuse and sexual violence.</p>
+                        <p class="leading-8	text-justify">{{ $event[0]->description }}</p>
                     </div>
                     <div>
                         <h3 class="text-2xl font-medium mb-3">About Organizer</h3>
@@ -207,8 +204,8 @@
                             <img src="{{ asset('storage/uploads/avatar.png') }}" alt="" class="h-16 w-16">
                         </div>
                         <div>
-                            <h5 class="font-medium text-lg">name organizer</h5>
-                            <span>hosted 2 event</span>
+                            <h5 class="font-medium text-lg">{{ $event[0]->user->name }}</h5>
+                            <span>hosted {{ $hostedEventByOrganizer }} event</span>
                             <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         </div>
                     </div>
@@ -216,22 +213,50 @@
             </div>
             <!-- Reservation Event -->
             <div
+
                 class="bg-white shadow-gray-200/60 shadow-md min-h-[200px] absolute top-0 right-0 rounded-md  w-[380px]  p-5">
                 <div class="text-center">
                     <h6 class="text-md">Booking will be ended on Added Date</h6>
                     <span class="text-gray-400 block text-sm">Time left to book this event</span>
                 </div>
+                <div id="dateEvents" class="hidden">{{ $event[0]->date}}</div>
+                <div class="my-3 flex items-center rounded-xl overflow-hidden gap-2" id="date_container">
+                    <div class=" w-[90px] h-[95px]  justify-center text-white bg-teal-600">
+                        <span class="block text-center text-sm  uppercase bg-teal-500 py-1">Days</span>
+                        <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="days">
+                                21
+                        </div>
+                    </div>
+                    <div class=" w-[90px] h-[100px]  justify-center text-white bg-teal-600">
+                        <span class="block text-center  text-sm uppercase bg-teal-500 py-1">Hours</span>
+                        <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="hours">
+                            20
+                        </div>
+                    </div>
+                    <div class=" w-[90px] h-[100px]  justify-center text-white bg-teal-600">
+                        <span class="block text-center  text-sm uppercase bg-teal-500 py-1">Minute</span>
+                        <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="min">
+                            21
+                        </div>
+                    </div>
+                    <div class=" w-[90px] h-[100px]  justify-center text-white bg-teal-600">
+                        <span class="block text-center text-sm  uppercase bg-teal-500 py-1">Seconds</span>
+                        <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="seconds">
+                            55
+                        </div>
+                    </div>
+
+                </div>
                 <div class="flex flex-col px-2 my-4">
                     <h3 class="text-lg font-medium">Date & Time</h3>
-                    <span class="text-sm my-2">Start Time - xxx</span>
-                    <span class="text-sm">End Time - yyy</span>
+                    <span class="text-sm my-2">{{ \Carbon\Carbon::parse($event[0]->date)->format('l, M d h:i A') }}</span>
                 </div>
                 <div class="px-2">
                     <h3 class="my-2 font-medium">Refund Policy</h3>
                     <span class="text-gray-700">Orders are non-refundable</span>
                 </div>
                 <div class="border-t border-gray-200 mt-6 flex flex-col">
-                    <span class="block text-lg font-medium my-6">Price</span>
+                    <span class="block text-lg font-medium my-6">Price : {{ $event[0]->price }} Dhs</span>
                     <form action="" method="post">
 
                         <button type="submit" class="bg-teal-600 block w-full text-white py-3 rounded">Purchase Ticket</button>
@@ -289,5 +314,36 @@
             settingWrapper.classList.add('opacity-0', 'invisible', 'scale-90')
         }
     })
+    // Count Down  event date
+    const dateEvent = document.getElementById('dateEvents').innerText;
+    const dayEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('min');
+    const secondsEl = document.getElementById('seconds');
 
+    let end = new Date(dateEvent).getTime();
+
+
+
+
+    const y = setInterval(function () {
+        const seconds = 1000;
+        const minutes = seconds * 60;
+        const hours = minutes * 60;
+        const days = hours * 24;
+        let now = new Date().getTime();
+        let difference = end - now;
+        if (difference < 0) {
+            clearInterval(y);
+            document.getElementById('date_container').innerHTML = ''
+            document.getElementById('date_container').innerHTML = `
+            <div class="w-full h-[70px] bg-rose-600 text-3xl text-white flex items-center justify-center font-semibold">Event Expired !</div>
+            `
+            return;
+        }
+        dayEl.innerText = Math.floor(difference / days);
+        hoursEl.innerText = Math.floor((difference % days) / hours);
+        minutesEl.innerText = Math.floor((difference % hours) / minutes);
+        secondsEl.innerText = Math.floor((difference % minutes) / seconds);
+    }, seconds)
 </script>
