@@ -8,6 +8,8 @@ use \App\Http\Controllers\OrganizerController;
 use \App\Http\Controllers\EventController;
 use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\CategoryController;
+use \App\Http\Controllers\ClientController;
+use \App\Http\Controllers\ReservationController;
 
 
 //|--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 // ==== Admin Routes ====
-Route::group([] , function() {
+Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/admin-panel' ,  [AdminController::class , 'dashboard']);
     Route::get('/admin-events' ,  [AdminController::class , 'events'])->name('admin.events');
     Route::get('/admin-users' ,  [AdminController::class , 'users'])->name('admin.users');
@@ -47,21 +49,30 @@ Route::group([] , function() {
     Route::post('/accept-events' ,  [EventController::class , 'accepted'])->name('accepted.event');
     Route::post('/refuse-events' ,  [EventController::class , 'refused'])->name('refused.event');
     Route::post('/create-event' ,  [AdminController::class , 'store'])->name('create.event');
-
 });
 
 // ==== Organizer Routes ====
-Route::group([] , function() {
+Route::middleware(['auth', 'role:organizer'])->group(function() {
     Route::get('/organizer' ,  [OrganizerController::class , 'dashboard'])->name('organizer');
     Route::get('/create-event' ,  [EventController::class , 'create'])->name('create.event');
     Route::post('/create-event' ,  [EventController::class , 'store'])->name('create.event');
     Route::delete('/delete-event' ,  [EventController::class , 'delete'])->name('delete.event');
 
 });
+// ==== Client Routes ====
+Route::middleware(['auth', 'role:client'])->group(function() {
+    Route::get('/client' ,  [ClientController::class , 'dashboard'])->name('client');
+    Route::post('/store-reservation' , [ReservationController::class , 'store'])->name('store.reservation');
+});
 // ==== Socialite Route ====
 Route::group([] , function () {
     Route::get('auth/google' , [SocialiteController::class , 'redirectToGoogle'])->name('google');
     Route::get('auth/google/callback' , [SocialiteController::class , 'handleGoogleCallback']);
+});
+
+// Banned Route
+Route::get('/banned' , function(){
+    return view('error.banned');
 });
 
 

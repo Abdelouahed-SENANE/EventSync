@@ -83,7 +83,7 @@
                 });
                 category.classList.add('active');
                 let eventsByCategory = category.getAttribute('data-cat')
-                console.log(eventsByCategory);
+
                 $.ajax({
                     url: '/explore-events',
                     method: 'GET',
@@ -239,9 +239,7 @@
                 error: function (error) {
                     console.log(error);
                 },
-                complete: function () {
-                    $('#pagination a').prop('disabled', false);
-                }
+
             });
         }
 

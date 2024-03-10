@@ -11,8 +11,6 @@ class EventController extends Controller
     //
     public function create(Request $request) {
         $categories = Category::all();
-
-
         return view('organizer.create-event' , ['categories' => $categories]);
     }
     public function store(Request $request) {

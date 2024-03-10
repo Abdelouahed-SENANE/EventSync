@@ -42,6 +42,26 @@
                                     class="absolute top-[95%] z-50 scale-90 opacity-0 invisible transition-all duration-300  right-[5px] min-w-[180px] bg-white rounded-md shadow"
                                     id="settingWrapper">
                                     <ul class="py-1 text-sm">
+                                        @if(auth()->user()->hasRole('organizer'))
+                                            <li>
+                                                <a
+                                                    class="block py-2 px-4 hover:bg-gray-100 "
+                                                    href="{{ route('organizer') }}"
+                                                >
+                                                    dashboard
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if(auth()->user()->hasRole('client'))
+                                            <li>
+                                                <a
+                                                    class="block py-2 px-4 hover:bg-gray-100 "
+                                                    href="{{ route('client') }}"
+                                                >
+                                                    dashboard
+                                                </a>
+                                            </li>
+                                        @endif
                                         <li>
                                             <a
                                                 class="block py-2 px-4 hover:bg-gray-100 "
@@ -238,7 +258,7 @@
                                             </form>
                                         </div>
                                         <!-- Display Image Event -->
-                                        <div class="w-[160px] h-full bg-cover bg-red-500 bg-center"
+                                        <div class="min-w-[160px] h-full bg-cover bg-red-500 bg-center"
                                              style="background-image: url('{{ asset("storage/" . $myEvent->image) }}')"></div>
                                         <div>
                                             <h4 class="text-2xl font-semibold">{{ $myEvent->title }}</h4>

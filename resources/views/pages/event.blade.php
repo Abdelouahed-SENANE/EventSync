@@ -150,27 +150,27 @@
                 <!-- head Section -->
                 <div class="flex gap-5 mb-6">
                     <div class="w-[100px] h-[100px] text-white bg-teal-400">
-                        <div class="p-0.5 bg-teal-600  text-sm  text-center uppercase">{{ \Carbon\Carbon::parse($event[0]->date)->format('l') }}</div>
+                        <div class="p-0.5 bg-teal-600  text-sm  text-center uppercase">{{ \Carbon\Carbon::parse($event->date)->format('l') }}</div>
                         <div class="flex flex-col w-full items-center mt-1">
-                            <span class="text-2xl font-medium">{{ \Carbon\Carbon::parse($event[0]->date)->format('d') }}</span>
-                            <span>{{strtoupper(\Carbon\Carbon::parse($event[0]->date)->format('M')) }}</span>
+                            <span class="text-2xl font-medium">{{ \Carbon\Carbon::parse($event->date)->format('d') }}</span>
+                            <span>{{strtoupper(\Carbon\Carbon::parse($event->date)->format('M')) }}</span>
                         </div>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-medium">{{ $event[0]->title }}</h1>
+                        <h1 class="text-2xl font-medium">{{ $event->title }}</h1>
                         <ul class="mt-3 flex items-center gap-4">
                             <li class="pr-5 border-r border-gray-200">
                                 <span class="mb-2 block text-sm font-medium text-teal-600">Location</span>
                                 <div class="flex items-center gap-2 text-gray-600"><i
-                                        class="fa-solid fa-location-dot"></i><span>{{ $event[0]->venue }}</span></div>
+                                        class="fa-solid fa-location-dot"></i><span>{{ $event->venue }}</span></div>
                             </li>
                             <li class="pr-5 border-r border-gray-200">
                                 <span class="mb-2 block text-sm font-medium text-teal-600">Date</span>
-                                <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($event[0]->date)->format('l, M d') }}</span></div>
+                                <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($event->date)->format('l, M d') }}</span></div>
                             </li>
                             <li class="mx-3">
                                 <span class="mb-2 block text-sm font-medium text-teal-600">Time (GMT)</span>
-                                <div class="flex items-center gap-2 text-gray-600"><span>{{ \Carbon\Carbon::parse($event[0]->date)->format('h:i A') }}</span>
+                                <div class="flex items-center gap-2 text-gray-600"><span>{{ \Carbon\Carbon::parse($event->date)->format('h:i A') }}</span>
                                 </div>
                             </li>
                         </ul>
@@ -180,21 +180,21 @@
                 <!-- body section -->
                 <div>
                     <div class="my-6 overflow-hidden">
-                        <img src="{{ asset('storage/') . '/'. $event[0]->image }}" alt="" class="w-full  max-h-[560px] rounded-md">
+                        <img src="{{ asset('storage/') . '/'. $event->image }}" alt="" class="w-full  max-h-[560px] rounded-md">
                     </div>
                     <div class="inline-flex items-center gap-3 border-b w-full  border-gray-200 p-3 rounded-md">
                         <div>
-                            <img src="{{ asset('storage'). '/' . $event[0]->user->picture }}" alt="" class="h-16 w-16">
+                            <img src="{{ asset('storage'). '/' . $event->user->picture }}" alt="" class="h-16 w-16">
                         </div>
                         <div class="flex flex-col  items-justify">
                             <span class="text-base">Organised by</span>
-                            <span>{{ $event[0]->user->name }}</span>
+                            <span>{{ $event->user->name }}</span>
                             <span class="block text-center h-1 mt-2 w-[50px] bg-teal-500"></span>
                         </div>
                     </div>
                     <div class="my-5">
                         <h2 class="text-xl font-bold">About This Event</h2>
-                        <p class="leading-8	text-justify">{{ $event[0]->description }}</p>
+                        <p class="leading-8	text-justify">{{ $event->description }}</p>
                     </div>
                     <div>
                         <h3 class="text-2xl font-medium mb-3">About Organizer</h3>
@@ -204,7 +204,7 @@
                             <img src="{{ asset('storage/uploads/avatar.png') }}" alt="" class="h-16 w-16">
                         </div>
                         <div>
-                            <h5 class="font-medium text-lg">{{ $event[0]->user->name }}</h5>
+                            <h5 class="font-medium text-lg">{{ $event->user->name }}</h5>
                             <span>hosted {{ $hostedEventByOrganizer }} event</span>
                             <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         </div>
@@ -219,48 +219,59 @@
                     <h6 class="text-md">Booking will be ended on Added Date</h6>
                     <span class="text-gray-400 block text-sm">Time left to book this event</span>
                 </div>
-                <div id="dateEvents" class="hidden">{{ $event[0]->date}}</div>
+                <div id="dateEvents" class="hidden">{{ $event->date}}</div>
                 <div class="my-3 flex items-center rounded-xl overflow-hidden gap-2" id="date_container">
-                    <div class=" w-[90px] h-[95px]  justify-center text-white bg-teal-600">
+                    <div class=" w-[90px] h-[100px]  justify-center text-white bg-teal-600">
                         <span class="block text-center text-sm  uppercase bg-teal-500 py-1">Days</span>
                         <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="days">
-                                21
+
                         </div>
                     </div>
                     <div class=" w-[90px] h-[100px]  justify-center text-white bg-teal-600">
                         <span class="block text-center  text-sm uppercase bg-teal-500 py-1">Hours</span>
                         <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="hours">
-                            20
+
                         </div>
                     </div>
                     <div class=" w-[90px] h-[100px]  justify-center text-white bg-teal-600">
                         <span class="block text-center  text-sm uppercase bg-teal-500 py-1">Minute</span>
                         <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="min">
-                            21
+
                         </div>
                     </div>
                     <div class=" w-[90px] h-[100px]  justify-center text-white bg-teal-600">
                         <span class="block text-center text-sm  uppercase bg-teal-500 py-1">Seconds</span>
                         <div class="w-full h-[60%] flex items-center justify-center text-5xl font-medium" id="seconds">
-                            55
+
                         </div>
                     </div>
 
                 </div>
                 <div class="flex flex-col px-2 my-4">
                     <h3 class="text-lg font-medium">Date & Time</h3>
-                    <span class="text-sm my-2">{{ \Carbon\Carbon::parse($event[0]->date)->format('l, M d h:i A') }}</span>
+                    <span class="text-sm my-2">{{ \Carbon\Carbon::parse($event->date)->format('l, M d h:i A') }}</span>
+                    <div>
+                        <h3 class="text-lg font-medium mb-2">Remaining seats</h3>
+                        <span class="text-2xl font-medium text-gray-700"> {{ $event->remaining_seats . '/' . $event->number_of_seats}}</span>
+                    </div>
                 </div>
                 <div class="px-2">
                     <h3 class="my-2 font-medium">Refund Policy</h3>
                     <span class="text-gray-700">Orders are non-refundable</span>
                 </div>
                 <div class="border-t border-gray-200 mt-6 flex flex-col">
-                    <span class="block text-lg font-medium my-6">Price : {{ $event[0]->price }} Dhs</span>
-                    <form action="" method="post">
+                    <span class="block text-lg font-medium my-6">Price : {{ $event->price }} Dhs</span>
+                    @if(now()->lt(\Carbon\Carbon::parse($event->date)) &&  $event->remaining_seats > 0)
+                        <form action="{{ route('store.reservation') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="event" value="{{ $event->id  }}">
+                            <input type="hidden" name="client" value="{{ auth()->user()->id }}">
+                            <button type="submit" class="bg-teal-600 block w-full text-white py-3 rounded">Purchase Ticket</button>
+                        </form>
+                    @else
+                            <button type="submit" class="bg-gray-400 disabled cursor-not-allowed	 block w-full text-white py-3 rounded">Purchase Ticket</button>
+                    @endif
 
-                        <button type="submit" class="bg-teal-600 block w-full text-white py-3 rounded">Purchase Ticket</button>
-                    </form>
                 </div>
             </div>
         </div>

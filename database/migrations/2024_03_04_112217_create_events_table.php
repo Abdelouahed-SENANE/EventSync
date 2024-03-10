@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->string('venue');
             $table->integer('number_of_seats');
+            $table->integer('remaining_seats');
             $table->integer('price');
             $table->string('validation_type');
             $table->dateTime('validated_at')->nullable();

@@ -35,14 +35,26 @@
                             </button>
                             <div class="absolute top-[95%] z-50 scale-90 opacity-0 invisible transition-all duration-300  right-[5px] min-w-[180px] bg-white rounded-md shadow" id="settingWrapper">
                                 <ul class="py-1 text-sm">
+                                    @if(auth()->user()->hasRole('organizer'))
                                     <li>
                                         <a
                                             class="block py-2 px-4 hover:bg-gray-100 "
                                             href="{{ route('organizer') }}"
                                         >
-                                            dashboard organizer
+                                            dashboard
                                         </a>
                                     </li>
+                                    @endif
+                                    @if(auth()->user()->hasRole('client'))
+                                    <li>
+                                        <a
+                                            class="block py-2 px-4 hover:bg-gray-100 "
+                                            href="{{ route('client') }}"
+                                        >
+                                            dashboard
+                                        </a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a
                                             class="block py-2 px-4 hover:bg-gray-100 "

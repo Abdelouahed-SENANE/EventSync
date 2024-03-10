@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
         $organizer->assignRole('organizer');
+
         $admin = User::create([
             'name' => 'admin',
             'email' => 'admin@test.fr',
@@ -34,5 +35,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
         $admin->assignRole('admin');
+        $client = User::create([
+            'name' => 'client',
+            'email' => 'client@test.fr',
+            'picture' => 'uploads/avatar.png',
+            'password' => Hash::make('password'),
+        ]);
+        $client->assignRole('client');
     }
 }

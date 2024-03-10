@@ -41,9 +41,9 @@ class PagesController extends Controller
         return view('pages.explore-events' , compact('events' , 'categories'));
     }
 
-    public function event(Event $event) {
-        $event = Event::with('user')->find($event);
-        $hostedEventByOrganizer = Event::where('user_id' , $event[0]->user_id)->get()->count();
+    public function event(Request $request) {
+        $event = Event::with('user')->find($request->event);
+        $hostedEventByOrganizer = Event::where('user_id' , $event->user_id)->get()->count();
         return view('pages.event' , compact('event' , 'hostedEventByOrganizer'));
     }
 }
