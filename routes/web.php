@@ -57,12 +57,16 @@ Route::middleware(['auth', 'role:organizer'])->group(function() {
     Route::get('/create-event' ,  [EventController::class , 'create'])->name('create.event');
     Route::post('/create-event' ,  [EventController::class , 'store'])->name('create.event');
     Route::delete('/delete-event' ,  [EventController::class , 'delete'])->name('delete.event');
+    Route::put('/accept-reservation' ,  [ReservationController::class , 'accepted'])->name('accept.reservation');
+    Route::put('/decline-reservation' ,  [ReservationController::class , 'declined'])->name('decline.reservation');
+    Route::get('/statistics' ,  [OrganizerController::class , 'statistics'])->name('statistics');
 
 });
 // ==== Client Routes ====
 Route::middleware(['auth', 'role:client'])->group(function() {
     Route::get('/client' ,  [ClientController::class , 'dashboard'])->name('client');
     Route::post('/store-reservation' , [ReservationController::class , 'store'])->name('store.reservation');
+    Route::post('/download-ticket' , [ClientController::class , 'download'])->name('download.ticket');
 });
 // ==== Socialite Route ====
 Route::group([] , function () {

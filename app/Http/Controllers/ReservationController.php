@@ -38,7 +38,21 @@ class ReservationController extends Controller
 
     }
     // --- Accepted Reservation ---
-    public function accepted() {
+    public function accepted(Request $request) {
+        $reservation =  Reservation::find($request->reservation);
+        $event = Event::find($reservation->event_id);
+        $reservation->status = 'approved';
+        $reservation->update();
+        $event->remaining_seats--;
+        $event->update();
 
+        return back()->with('message' , 'The reservation has been approved');
+    }
+    public function declined(Request $request) {
+        $reservation =  Reservation::find($request->reservation);
+        $reservation->status = 'declined';
+        $reservation->update();
+
+        return back()->with('message' , 'The reservation has been declined');
     }
 }

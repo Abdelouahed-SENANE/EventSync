@@ -41,7 +41,7 @@
                             </div>
                             <div class="h-auto overflow-hidden">
                                 <div class="h-44 overflow-hidden relative">
-                                    <img src="{{ asset('assets/images/test.jpg') }}" alt="">
+                                    <img src="{{ asset('storage/') . '/' . $event->image }}" alt="">
                                 </div>
                             </div>
                             <div class="bg-white py-4 px-3">

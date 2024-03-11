@@ -4,16 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Reservation;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use function PHPUnit\Framework\isNull;
 
 class AdminController extends Controller
 {
     //
     public function dashboard() {
-        return view('admin.dashboard');
+        $nbrUsers = User::count();
+        $nbrReservations = Reservation::count();
+        $nbrEvents = Event::count();
+        $nbrOrganizer = User::role('organizer')->count();
+        $nbrClient = User::role('client')->count();
+
+        return view('admin.dashboard' , compact('nbrOrganizer' , 'nbrReservations' , 'nbrUsers', 'nbrEvents' , 'nbrClient'));
     }
 
     public function users()
@@ -36,25 +44,5 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'User soft deleted successfully.');
     }
 
-    public function suspendUser($userId, Request $request)
-    {
-        $user = User::find($userId);
 
-        if ($user) {
-            if ($user->suspended) {
-                $user->suspended = false;
-                $user->save();
-                return redirect()->back()->with('success', 'User unsuspended successfully.');
-            }
-            else {
-                $user->suspended = true;
-                $user->suspended_until = Carbon::now()->addDays($request->input('duration'));
-                $user->save();
-
-                return redirect()->back()->with('success', 'User suspended successfully.');
-            }
-        }
-
-        return redirect()->back()->with('error', 'Failed to suspend user.');
-    }
 }

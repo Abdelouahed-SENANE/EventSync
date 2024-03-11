@@ -9,7 +9,7 @@
     </aside>
     <main class="flex-grow min-h-screen w-full  ml-[260px]">
 
-        <div class="grid grid-cols-5 gap-2 my-20 mx-20">
+        <div class="grid grid-cols-5 gap-2 my-40 mx-20">
             <div class="bg-blue-500 text-white p-6 rounded-md">
                 <div class="flex items-center justify-between ">
                     <span>
@@ -25,20 +25,20 @@
                 </div>
                 <div class="mt-5">
                     <span class="text-4xl">
-
+                        {{ $nbrUsers }}
                     </span>
                 </div>
             </div>
             <div class="bg-green-500 text-white p-6 rounded-md">
                 <div class="flex items-center justify-between ">
                     <span>
-                        <i class="fa-solid fa-car text-[40px]"></i>
-
+                       <i class="fa-solid fa-people-roof text-[40px]"></i>
                     </span>
-                    <h4 class="text-bold text-2xl">Drivers</h4>
+                    <h4 class="text-bold text-2xl">Organizer</h4>
                 </div>
                 <div class="mt-5">
                     <span class="text-4xl">
+                        {{ $nbrOrganizer }}
 
                     </span>
                 </div>
@@ -46,14 +46,14 @@
             <div class="bg-orange-400 text-white p-6 rounded-md">
                 <div class="flex items-center justify-between ">
                     <span>
-                        <i class="fa-solid fa-person-walking text-[40px]"></i>
+                        <i class="fa-solid fa-person text-[40px]"></i>
 
                     </span>
-                    <h4 class="text-bold text-2xl">Passengers</h4>
+                    <h4 class="text-bold text-2xl">Client</h4>
                 </div>
                 <div class="mt-5">
                     <span class="text-4xl">
-
+                        {{ $nbrClient }}
                     </span>
                 </div>
             </div>
@@ -67,21 +67,22 @@
                 </div>
                 <div class="mt-5">
                     <span class="text-4xl">
-
+                        {{ $nbrReservations }}
                     </span>
                 </div>
             </div>
             <div class="bg-teal-600 text-white p-6 rounded-md">
                 <div class="flex items-center justify-between ">
                     <span>
-                        <i class="fa-solid fa-route text-[40px]"></i>
+
+                        <i class="fa-solid fa-calendar-check text-[40px]"></i>
 
                     </span>
-                    <h4 class="text-bold text-2xl">Routes</h4>
+                    <h4 class="text-bold text-2xl">Events</h4>
                 </div>
                 <div class="mt-5">
                     <span class="text-4xl">
-
+                        {{ $nbrEvents }}
                     </span>
                 </div>
             </div>

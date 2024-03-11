@@ -16,6 +16,7 @@ class Event extends Model
         'date',
         'venue',
         'number_of_seats',
+        'remaining_seats',
         'price',
         'validation_type',
         'user_id',
@@ -25,9 +26,12 @@ class Event extends Model
     public function category() {
         return $this->belongsTo(Category::class , 'category_id');
     }
-        public function user() {
-            return $this->belongsTo(User::class , 'user_id');
-        }
+    public function user() {
+        return $this->belongsTo(User::class , 'user_id');
+    }
+    public function reservation() {
+        return $this->hasMany(Reservation::class);
+    }
 
 }
 

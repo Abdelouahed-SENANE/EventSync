@@ -134,8 +134,10 @@
                                 </div>
                                 <div class="bg-white py-4 px-3">
                                     <h3 class="text-sm mb-2 font-medium">${event.title}</h3>
-                                    <div class="flex justify-between items-center">
-                                        <p class="text-md text-gray-400 text-nowrap overflow-hidden text-ellipsis">${event.description}</p>
+                                    <div class="">
+                                        <p class="text-sm text-gray-400 text-nowrap">
+                                              <span>${event.description}</span>
+                                        </p>
                                     </div>
                                     <div class="font-semibold text-md my-1">
                                         <span>${event.price} Dhs</span>

@@ -56,7 +56,7 @@
                         <x-input-label class="text-lg my-3">
                             Date event <span class="text-red-600">*</span>
                         </x-input-label>
-                        <input type="datetime-local" id="date" name="date"
+                        <input type="datetime-local" id="date" name="date" value="{{ now()->format('Y-m-d\TH:i') }}" min="{{ now()->format('Y-m-d\TH:i') }}" max="{{ now()->addYears(2)->format('Y-m-d\TH:i') }}"
                                   class="block p-2.5 text-lg resize-none w-full text-sm text-gray-900 text-base focus:border border-gray-200  bg-gray-50 rounded-sm outline-none   focus:ring focus:border-teal-400 focus:outline-none focus:ring-teal-500 focus:ring-opacity-20"
                                   placeholder="Write your thoughts here..."/>
 

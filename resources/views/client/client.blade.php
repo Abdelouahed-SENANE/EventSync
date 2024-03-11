@@ -1,6 +1,6 @@
 @include('layouts.public-layout')
 
-<section class="relative bg-gray-100 p-2 min-h-screen">
+<section class="relative bg-gray-100 min-h-screen">
     <header class="fixed top-0 z-[1000] left-0 right-0  bg-white transition-all shadow duration-300  ease-in-out"
             id="header">
         <div class="mx-auto flex h-20  w-[95%] items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -156,23 +156,23 @@
         </div>
     </header>
     {{--  Head page --}}
-    <div class="bg-teal-100 text-gray-800 w-full z-10 h-[200px] mt-[80px]">
+    <div class=" text-gray-800 w-full relative z-10 h-[300px] bg-center bg-cover mt-[80px]" style="background-image: url('{{ asset('assets/images/event-bg.jpg') }}')">
+        <div class="absolute top-0 left-0 w-full h-full bg-teal-700/40"></div>
         <div class="mx-auto w-xl h-full container flex items-end justify-end">
             <div class="relative w-full">
-                <div class="absolute bottom-[-10px] left-0 ">
-                    <img src="{{ asset('storage/')  . '/'. auth()->user()->picture }}" alt=""
+                <div class="absolute bottom-[-16px] left-0 ">
+                    <img src="{{ asset('storage/') . '/' . auth()->user()->picture}}" alt=""
                          class="w-[160px] h-[160px] border-8 rounded-full border-white">
                 </div>
                 <div class="ml-[180px]">
-                    <div class="mb-4">
-                        <h5 class="text-2xl font-light mb-2">Member
-                            Since {{ \Carbon\Carbon::parse(auth()->user()->created_at)->format('Y') }}</h5>
-                        <h2 class="text-3xl font-semibold">{{ auth()->user()->name }}</h2>
+                    <div class="mb-4 text-white">
+                        <h5 class="text-2xl font-light mb-2">Member Since 2024</h5>
+                        <h2 class="text-3xl font-semibold">Abdelouahed SENANE</h2>
                     </div>
                     <div>
-                        <ul class="flex items-center text-black  w-fit overflow-hidden">
-                            <li class="text-xl py-2 px-5 cursor-pointer relative active  tab_link">Home</li>
-                            <li class="text-xl py-2 px-5 cursor-pointer  relative tab_link">My Reservation</li>
+                        <ul class="flex items-center text-black bg-slate-200 rounded-tr-lg rounded-tl-md    w-fit overflow-hidden">
+                            <li class="text-base py-2 px-5 cursor-pointer relative active  tab_link">Home</li>
+                            <li class="text-base py-2 px-5 cursor-pointer  relative tab_link">My Reservation</li>
                         </ul>
                     </div>
                 </div>
@@ -215,50 +215,155 @@
                             <div class="grid my-5 grid-cols-2 xl:grid-cols-3 items-center gap-4 ">
 
                                 <!-- Card Reservation  -->
-                                <div class=" w-full rounded-lg overflow-hidden shadow-lg shadow-gray-100">
-                                    <div class="bg-white  relative h-[190px] bg-center bg-cover w-full"
-                                         style="background-image: url('{{ asset('storage/uploads/event.jpg') }}');">
-                                        <div class="absolute top-0 left-0 bg-amber-700/30 w-full h-full"></div>
-                                        <div class="text-white relative px-3 py-[100px]">
-                                            <h4 class="text-2xl font-medium">EventSync</h4>
-                                            <p class="text-sm">
-                                                You're invited to reserve your spot at our highly anticipated event,
-                                                [Event Name].
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="p-5 border-b relative border-gray-200">
-                                        <div class="flex justify-between">
-                                            <h2 class="text-2xl">
-                                                Title event
-                                            </h2>
-                                            <div class="px-2 bg-green-500 rounded-md text-sm text-white py-2">
-                                                <i class="fa-regular fa-circle-check text-[20px]"></i>
+                                @foreach($reservations as $reservation)
+                                    @if($reservation->status === 'approved')
+                                        <div class=" w-full rounded-lg overflow-hidden shadow-lg shadow-gray-100">
+                                            <div class="bg-white  relative h-[190px] bg-center bg-cover w-full"
+                                                 style="background-image: url('{{ asset('storage/') . '/'. $reservation->event->image}}');">
+                                            <div class="absolute z-50 bg-white w-[40px] h-[40px] flex items-center justify-center rounded-md top-2 right-2">
+                                                    <form action="{{ route('download.ticket') }}">
+                                                        <button type="submit" class="w-full h-full  ">
+                                                            <i class="fa-solid fa-download text-[20px]"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <div class="absolute top-0 left-0 bg-amber-700/30 w-full h-full"></div>
+                                                <div class="text-white relative px-3 py-[100px]">
+                                                    <h4 class="text-2xl font-medium">EventSync</h4>
+                                                    <p class="text-sm">
+                                                        You're invited to reserve your spot at our highly anticipated event,
+                                                        {{ $reservation->event->title }}.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="p-5 border-b relative border-gray-200">
+                                                <div class="flex justify-between">
+                                                    <h2 class="text-2xl">
+                                                        {{ $reservation->event->title }}
+                                                    </h2>
+                                                    <div class="px-2 bg-green-500 rounded-md text-sm text-white py-2">
+                                                        <i class="fa-regular fa-circle-check text-[20px]"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <ul class="p-3 inline-flex w-full gap-2 ">
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Location</span>
+                                                        <div class="flex text-sm items-center gap-2 text-gray-600"><i
+                                                                class="fa-solid fa-location-dot"></i><span>{{ $reservation->event->venue }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Date</span>
+                                                        <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($reservation->event->date)->format('d M Y') }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                        <div class="flex items-center gap-2  text-gray-600">
+                                                            <span>{{ \Carbon\Carbon::parse($reservation->event->date)->format('h:i A') }}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="">
-                                        <ul class="p-3 inline-flex w-full gap-2 ">
-                                            <li class="px-5 flex-1">
-                                                <span class="mb-2  text-sm font-medium text-teal-600">Location</span>
-                                                <div class="flex items-center gap-2 text-gray-600"><i
-                                                        class="fa-solid fa-location-dot"></i><span>Casablanca</span>
+                                    @elseif($reservation->status === 'pending')
+                                        <div class=" w-full rounded-lg overflow-hidden shadow-lg shadow-gray-100">
+                                            <div class="bg-white  relative h-[190px] bg-center bg-cover w-full"
+                                                 style="background-image: url('{{ asset('storage/') . '/'. $reservation->event->image}}');">
+                                                <div class="absolute top-0 left-0 bg-amber-700/30 w-full h-full"></div>
+                                                <div class="text-white relative px-3 py-[100px]">
+                                                    <h4 class="text-2xl font-medium">EventSync</h4>
+                                                    <p class="text-sm">
+                                                        You're invited to reserve your spot at our highly anticipated event,
+                                                        {{ $reservation->event->title }}.
+                                                    </p>
                                                 </div>
-                                            </li>
-                                            <li class="px-5 flex-1">
-                                                <span class="mb-2  text-sm font-medium text-teal-600">Date</span>
-                                                <div class="flex items-center gap-2  text-gray-600"><span>mar ,34</span>
+                                            </div>
+                                            <div class="p-5 border-b relative border-gray-200">
+                                                <div class="flex justify-between">
+                                                    <h2 class="text-2xl">
+                                                        {{ $reservation->event->title }}
+                                                    </h2>
+                                                    <div class="px-2 bg-yellow-400 rounded-md text-sm text-white py-2">
+                                                        <i class="fa-solid fa-spinner text-[20px]" ></i>
+                                                    </div>
                                                 </div>
-                                            </li>
-                                            <li class="px-5 flex-1">
-                                                <span class="mb-2  text-sm font-medium text-teal-600">Time (GMT)</span>
-                                                <div class="flex items-center gap-2  text-gray-600">
-                                                    <span>12:22 AM</span>
+                                            </div>
+                                            <div class="">
+                                                <ul class="p-3 inline-flex w-full gap-2 ">
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Location</span>
+                                                        <div class="flex text-sm items-center gap-2 text-gray-600"><i
+                                                                class="fa-solid fa-location-dot"></i><span>{{ $reservation->event->venue }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Date</span>
+                                                        <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($reservation->event->date)->format('d M Y') }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                        <div class="flex items-center gap-2  text-gray-600">
+                                                            <span>{{ \Carbon\Carbon::parse($reservation->event->date)->format('h:i A') }}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class=" w-full rounded-lg overflow-hidden shadow-lg shadow-gray-100">
+                                            <div class="bg-white  relative h-[190px] bg-center bg-cover w-full"
+                                                 style="background-image: url('{{ asset('storage/') . '/'. $reservation->event->image}}');">
+                                                <div class="absolute top-0 left-0 bg-amber-700/30 w-full h-full"></div>
+                                                <div class="text-white relative px-3 py-[100px]">
+                                                    <h4 class="text-2xl font-medium">EventSync</h4>
+                                                    <p class="text-sm">
+                                                        You're invited to reserve your spot at our highly anticipated event,
+                                                        {{ $reservation->event->title }}.
+                                                    </p>
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                            </div>
+                                            <div class="p-5 border-b relative border-gray-200">
+                                                <div class="flex justify-between">
+                                                    <h2 class="text-2xl">
+                                                        {{ $reservation->event->title }}
+                                                    </h2>
+                                                    <div class="px-2 bg-rose-500 rounded-md text-sm text-white py-2">
+                                                        <i class="fa-solid fa-xmark text-[20px]"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <ul class="p-3 inline-flex w-full gap-2 ">
+                                                    <li class="flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Location</span>
+                                                        <div class="flex text-xs items-center gap-2 text-gray-600"><i
+                                                                class="fa-solid fa-location-dot"></i><span>{{ $reservation->event->venue }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Date</span>
+                                                        <div class="flex items-center gap-2  text-gray-600"><span>{{ \Carbon\Carbon::parse($reservation->event->date)->format('d M Y') }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="p flex-1">
+                                                        <span class="mb-2  text-sm font-medium text-teal-600">Time (GMT)</span>
+                                                        <div class="flex items-center gap-2  text-gray-600">
+                                                            <span>{{ \Carbon\Carbon::parse($reservation->event->date)->format('h:i A') }}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endif
+
+
+
+
+                                @endforeach
 
                             </div>
 

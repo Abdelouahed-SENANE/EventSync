@@ -34,6 +34,7 @@ class EventController extends Controller
             'date' => $request->input('date'),
             'venue' => $request->input('venue'),
             'number_of_seats' => $request->input('seats'),
+            'remaining_seats' => $request->input('seats'),
             'price' =>$request->input('price'),
             'validation_type' => $request->input('validation'),
             'user_id' => $request->input('user'),

@@ -42,6 +42,26 @@
                                     class="absolute top-[95%] z-50 scale-90 opacity-0 invisible transition-all duration-300  right-[5px] min-w-[180px] bg-white rounded-md shadow"
                                     id="settingWrapper">
                                     <ul class="py-1 text-sm">
+                                        @if(auth()->user()->hasRole('organizer'))
+                                            <li>
+                                                <a
+                                                    class="block py-2 px-4 hover:bg-gray-100 "
+                                                    href="{{ route('organizer') }}"
+                                                >
+                                                    dashboard
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if(auth()->user()->hasRole('client'))
+                                            <li>
+                                                <a
+                                                    class="block py-2 px-4 hover:bg-gray-100 "
+                                                    href="{{ route('client') }}"
+                                                >
+                                                    dashboard
+                                                </a>
+                                            </li>
+                                        @endif
                                         <li>
                                             <a
                                                 class="block py-2 px-4 hover:bg-gray-100 "
@@ -216,6 +236,18 @@
 
                 class="bg-white shadow-gray-200/60 shadow-md min-h-[200px] absolute top-0 right-0 rounded-md  w-[380px]  p-5">
                 <div class="text-center">
+                    @if(session('success'))
+                        <div id="alert-border-3" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50" role="alert">
+                            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            <div class="ms-3 text-sm font-medium">
+
+                                {{ session('success') }}
+                            </div>
+
+                        </div>
+                    @endif
                     <h6 class="text-md">Booking will be ended on Added Date</h6>
                     <span class="text-gray-400 block text-sm">Time left to book this event</span>
                 </div>
