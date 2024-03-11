@@ -1,6 +1,6 @@
 @include('layouts.public-layout')
 
-<section class="relative bg-gray-100  min-h-screen">
+<section class="relative bg-slate-100 py-1  min-h-screen">
     <header class="fixed top-0 z-[1000] left-0 right-0  bg-white transition-all shadow duration-300  ease-in-out"
             id="header">
         <div class="mx-auto flex h-20  w-[95%] items-center gap-8 px-4 sm:px-6 lg:px-8">
