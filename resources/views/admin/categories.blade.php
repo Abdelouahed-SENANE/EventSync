@@ -181,6 +181,8 @@
                 if (popup.classList.contains('opacity-0')) {
                     popup.classList.remove('opacity-0', 'invisible');
                     formPicture.classList.remove('scale-90');
+                    $('#alertDanger').addClass('hidden');
+
                 }
                 const category_id = document.getElementById('category');
                 const submit = document.getElementById('submit');
@@ -215,6 +217,7 @@
                 const category_id = document.getElementById('category');
                 let desc = document.getElementById('description');
                 let title = document.getElementById('title');
+
                 category_id.value = '';
                 desc.value = '';
                 title.value = '';

@@ -79,5 +79,7 @@ Route::get('/banned' , function(){
     return view('error.banned');
 });
 
+Route::get('/test' ,  [ClientController::class , 'test']);
+
 
 require __DIR__.'/auth.php';
